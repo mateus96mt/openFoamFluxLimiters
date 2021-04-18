@@ -72,21 +72,21 @@ public:
         const vector& d
     ) const
     {
-        const scalar r = max
+        scalar r = LimiterFunc::r
         (
-            LimiterFunc::r(faceFlux, phiP, phiN, gradcP, gradcN, d), 0
+            faceFlux, phiP, phiN, gradcP, gradcN, d
         );
         
         double alpha = 2.0;
         
         double topus = (
-                        ( (0.5*(abs(r)+r)) * 
+                        ( (0.5*(mag(r)+r)) * 
                             ((-0.5*alpha + 1.0)*r*r + (alpha + 4.0)*r + (-0.5*alpha +3.0) ) 
                         )/
-                        ( (1 + abs(r))*(1 + abs(r))*(1 + abs(r)) )
+                        ( (1.0 + mag(r))*(1.0 + mag(r))*(1.0 + mag(r)) )
                     );
         
-        return max(topus, 0.0);
+        return max(0.0, topus);
     }
 };
 

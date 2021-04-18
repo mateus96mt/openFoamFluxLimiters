@@ -72,19 +72,21 @@ public:
         const vector& d
     ) const
     {
-        const scalar r = max
+        scalar r = LimiterFunc::r
         (
-            LimiterFunc::r(faceFlux, phiP, phiN, gradcP, gradcN, d), 0
+            faceFlux, phiP, phiN, gradcP, gradcN, d
         );
-
+        
+        double gamma = 12.0;
+        
         double sdpus = (
-                        ( (0.5*(abs(r)+r)) * 
-                            (4*r*r + 12*r ) 
+                        ( (0.5*(mag(r)+r)) * 
+                            ((-8.0 + 2.0*gamma)*r*r*r + (40.0 - 4.0*gamma)*r*r + 2*gamma*r)
                         )/
-                        ( (1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r)) )
+                        ( (1.0 + mag(r))*(1.0 + mag(r))*(1.0 + mag(r))*(1.0 + mag(r))*(1.0 + mag(r)) )
                     );
         
-        return max(sdpus, 0.0);
+        return max(0.0, sdpus);
     }
 };
 

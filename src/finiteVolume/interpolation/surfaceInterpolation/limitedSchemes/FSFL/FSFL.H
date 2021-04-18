@@ -72,21 +72,21 @@ public:
         const vector& d
     ) const
     {
-        const scalar r = max
+        scalar r = LimiterFunc::r
         (
-            LimiterFunc::r(faceFlux, phiP, phiN, gradcP, gradcN, d), 0
+            faceFlux, phiP, phiN, gradcP, gradcN, d
         );
         
         double beta = 2.0;
         
         double fsfl = (
-                        ( (0.5*(abs(r)+r)) * 
+                        ( (0.5*(mag(r)+r)) * 
                             (beta*r*r + (8.0 - 2.0*beta)*r + beta ) 
                         )/
-                        ( (1 + abs(r))*(1 + abs(r))*(1 + abs(r)) )
+                        ( (1.0 + mag(r))*(1.0 + mag(r))*(1.0 + mag(r)) )
                     );
         
-        return max(fsfl, 0.0);
+        return max(0.0, fsfl);
     }
 };
 

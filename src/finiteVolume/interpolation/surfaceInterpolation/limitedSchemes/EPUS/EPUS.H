@@ -72,21 +72,21 @@ public:
         const vector& d
     ) const
     {
-        const scalar r = max
+        scalar r = LimiterFunc::r
         (
-            LimiterFunc::r(faceFlux, phiP, phiN, gradcP, gradcN, d), 0
+            faceFlux, phiP, phiN, gradcP, gradcN, d
         );
 
-        double lambda = 2.0;
+        double lambda = 95.0;
         
         double epus = (
-                        ( (0.5*(abs(r)+r)) * 
-                            ((2*lambda-32.0)*r*r*r*r+(160.0-4.0*lambda)*r*r*r+2*lambda*r*r) 
+                        ( (0.5*(mag(r)+r)) * 
+                            ((2.0*lambda - 32.0)*r*r*r*r + (160.0 - 4.0*lambda)*r*r*r + 2*lambda*r*r)
                         )/
-                        ( (1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r))*(1 + abs(r)) )
+                        ( (1 + mag(r))*(1 + mag(r))*(1 + mag(r))*(1 + mag(r))*(1 + mag(r))*(1 + mag(r))*(1 + mag(r)) )
                     );
         
-        return max(epus, 0.0);
+        return max(0.0, epus);
     }
 };
 

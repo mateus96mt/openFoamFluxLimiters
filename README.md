@@ -26,7 +26,7 @@ Note que o caminho '/opt/openfoam8/...' pode ser diferente em sua máquina se o 
 
 Navegue até '/opt/openfoam8/src/finiteVolume/Make/' no diretório do OpenFoam em sua máquina
 
-Abra o arquivo 'file' e adicione o seguinte trecho de código no mesmo:
+Abra o arquivo 'files' e adicione o seguinte trecho de código no mesmo:
 
 ```c++
 $(limitedSchemes)/TOPUS/TOPUS.C

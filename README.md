@@ -1,32 +1,36 @@
-# Instruções
+## README Translation
+- [English](README.md)
+- [Portuguese](README-pt.md)
 
-## 1. Instalação do OpenFoam em sua máquina:
+# Instructions
 
-Para utilizar esse repositório é necessário instalar o OpenFoam na sua máquina (Linux).
+## 1. Installing OpenFoam on your machine:
 
-A instalação em sistemas ubuntu pode ser feita seguindo este tutorial: [instalação ubuntu]: https://openfoam.org/download/8-ubuntu/
+To use this repository it is necessary to install OpenFoam on your machine (Linux).
 
-Instalações em outras versões Linux pode ser feita através desse tutorial: [instalação]: https://openfoam.org/download/
+Installation on ubuntu systems can be done by following this tutorial: [ubuntu installation]: https://openfoam.org/download/8-ubuntu/
 
-Com o OpenFoam devidamente instalado em sua máquina de acordo com os tutoriais acima podemos avançar para instalação dos esquemas Upwind deste repositório (TOPUS, FSFL, SDPUS-C1 e EPUS)
+Installations on other Linux versions can be done through this tutorial: [installation]: https://openfoam.org/download/
 
-## 2. Instalação dos esquemas TOPUS, FSFL, SDPUS-C1 e EPUS no OpenFoam:
+With OpenFoam properly installed on your machine according to the tutorials above, we can proceed to install the Upwind schematics from this repository (TOPUS, FSFL, SDPUS-C1 and EPUS)
 
-### 2.1 Copiar os arquivos necessários deste repositório para o local de instalação do OpenFoam em sua máquina.
+## 2. Installation of TOPUS, FSFL, SDPUS-C1 and EPUS schemas in OpenFoam:
 
-Navegue pelo local de instalação do OpenFoam em sua máquina até o caminho abaixo:
+### 2.1 Copy the necessary files from this repository to the OpenFoam installation location on your machine.
 
-Copie as pastas desse repositório em 'openFoamFluxLimiters/src/finiteVolume/interpolation/surfaceInterpolation/limitedSchemes/' para o mesmo caminho no local de instalação do OpenFoam em sua máquina '/opt/openfoam8/src/finiteVolume/interpolation/surfaceInterpolation/limitedSchemes'.
+Browse the OpenFoam installation location on your machine to the path below:
 
-Talves seja necessário permissão de administrador para copiar os arquivos, se atende a isto.
+Copy the folders from that repository in 'openFoamFluxLimiters/src/finiteVolume/interpolation/surfaceInterpolation/limitedSchemes/' to the same path in the OpenFoam installation location on your machine '/opt/openfoam8/src/finiteVolume/interpolation/surfaceInterpolation/limitedSchemes'.
 
-Note que o caminho '/opt/openfoam8/...' pode ser diferente em sua máquina se o OpenFoam for instalado por outros meios que não os citados neste tutorial.
+You may need administrator permission to copy the files, if that's what you need.
 
-### 2.2 Incluir os arquivos copiados anteriormente no arquivo de compilação do OpenFoam
+Note that the path '/opt/openfoam8/...' may be different on your machine if OpenFoam is installed by means other than those mentioned in this tutorial.
 
-Navegue até '/opt/openfoam8/src/finiteVolume/Make/' no diretório do OpenFoam em sua máquina
+### 2.2 Include the previously copied files in the OpenFoam build file
 
-Abra o arquivo 'files' e adicione o seguinte trecho de código no mesmo:
+Navigate to '/opt/openfoam8/src/finiteVolume/Make/' in the OpenFoam directory on your machine
+
+Open the 'files' file and add the following code snippet in it:
 
 ```c++
 $(limitedSchemes)/TOPUS/TOPUS.C
@@ -35,7 +39,7 @@ $(limitedSchemes)/SD_PUS_C1/SD_PUS_C1.C
 $(limitedSchemes)/EPUS/EPUS.C
 ```
 
-esse trecho de código deve ser inserido na definição da variável ```limitedSchemes```, ficando como abaixo:
+this code snippet must be inserted into the definition of the ```limitedSchemes``` variable, as follows:
 
 ```c
 limitedSchemes = $(surfaceInterpolation)/limitedSchemes
@@ -53,25 +57,25 @@ $(limitedSchemes)/SD_PUS_C1/SD_PUS_C1.C
 $(limitedSchemes)/EPUS/EPUS.C
 ```
 
-### 2.3 Compilar o OpenFoam para incluir os novos limitadores de fluxo
+### 2.3 Compile OpenFoam to include the new flow limiters
 
-Navegue até o local de instalação do OpenFoam em sua máquina '/opt/openfoam8/src/finiteVolume' e abra um terminal dentro desta pasta
+Navigate to the OpenFoam installation location on your machine '/opt/openfoam8/src/finiteVolume' and open a terminal inside this folder
 
-Com o terminal aberto execute os seguintes comandos:
+With the terminal open, run the following commands:
 
 ```
 wmake
 ```
 
-O processo de compilação deve começar
+The build process should start
 
-Caso ocorra algum erro de permissão digite o comando 
+If there is a permission error, type the command
 
 ```
 sudo -i
 cd /opt/openfoam8/src/finiteVolume
 ```
 
-Novamente reforço que o caminho pode ser diferente dependendo da versão do OpenFoam em sua máquina, por exemplo a versão 9 teria o caminho '/opt/openfoam9...'
+Again, the path may be different depending on the version of OpenFoam on your machine, for example version 9 would have the path '/opt/openfoam9...'
 
-Se o processo de compilação tiver ocorrido sem erros a compilação foi um sucesso!
+If the compilation process went without errors, the compilation was successful!
